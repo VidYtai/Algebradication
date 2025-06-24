@@ -12,7 +12,7 @@ import {
     getUserSpecificKey
 } from '../constants';
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = "AIzaSyCoHj3OwEbxQqcLvWeHORAzWBPvjX3_61k";
 
 let ai: GoogleGenAI | null = null;
 if (API_KEY) {
