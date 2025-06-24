@@ -24,6 +24,8 @@ import InteractiveTutorialHint from './components/InteractiveTutorialHint';
 import LoadingSpinner from './components/LoadingSpinner';
 import LearningsModal from './components/LearningsModal';
 
+const APP_API_KEY = "AIzaSyCoHj3OwEbxQqcLvWeHORAzWBPvjX3_61k";
+
 const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<string | null>(null);
   const [currentScreen, setCurrentScreen] = useState<GameScreen>(GameScreen.AUTH); 
@@ -44,7 +46,7 @@ const App: React.FC = () => {
   const [isLearningsModalOpen, setIsLearningsModalOpen] = useState<boolean>(false);
   
   useEffect(() => {
-    if (!process.env.API_KEY) {
+    if (!APP_API_KEY) {
       setApiKeyAvailable(false);
     } else {
       setApiKeyAvailable(true);
