@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { CaseData, Dialogue, CharacterRole, GameScreen, PlayerTool, TutorialStep } from '../types';
 import { PLAYER_TOOLS, API_KEY_ERROR_MESSAGE } from '../constants';
@@ -546,46 +547,47 @@ const Courtroom: React.FC<CourtroomProps> = ({
   };
 
   return (
-    <div className="courtroom-gradient-bg flex-grow flex flex-col p-2 sm:p-3 md:p-4 relative w-full overflow-hidden">
-      <div id="timer-display-area" data-tutorial-target-id="courtroom-timer" className="absolute top-2 sm:top-3 right-2 sm:right-4 glassmorphic-surface p-2 sm:p-2.5 rounded-lg shadow-xl border border-amber-500/50 z-10">
-        <p className="text-amber-300 text-lg sm:text-xl md:text-2xl font-bold tracking-wider tabular-nums">{formatTime(timeLeft)}</p>
+    <div className="courtroom-gradient-bg flex-grow flex flex-col p-2 sm:p-3 relative w-full overflow-hidden">
+      <div id="timer-display-area" data-tutorial-target-id="courtroom-timer" className="absolute top-2 right-2 sm:top-3 sm:right-4 glassmorphic-surface p-1.5 sm:p-2.5 rounded-lg shadow-xl border border-amber-500/50 z-10">
+        <p className="text-amber-300 text-base sm:text-xl md:text-2xl font-bold tracking-wider tabular-nums">{formatTime(timeLeft)}</p>
       </div>
 
-      <div id="character-display-area" className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2 md:gap-3 mb-2 sm:mb-3 mt-1 sm:mt-0">
+      <div id="character-display-area" className="grid grid-cols-4 gap-1 sm:gap-2 md:gap-3 mb-1 sm:mb-2 mt-1 sm:mt-0">
         <CharacterDisplay role={CharacterRole.JUDGE} isSpeaking={currentSpeaker === CharacterRole.JUDGE} />
         <CharacterDisplay role={CharacterRole.PROSECUTOR} isSpeaking={currentSpeaker === CharacterRole.PROSECUTOR} />
         <CharacterDisplay role={CharacterRole.CO_COUNSEL} isSpeaking={currentSpeaker === CharacterRole.CO_COUNSEL} />
         <CharacterDisplay role={CharacterRole.CLIENT} isSpeaking={currentSpeaker === CharacterRole.CLIENT} />
       </div>
 
-      <div id="dialogue-box-area" className="mb-3 sm:mb-4 flex-grow min-h-0">
+      <div id="dialogue-box-area" className="mb-2 sm:mb-3 flex-grow min-h-0">
         <DialogueBox dialogues={dialogueHistory} currentSpeaker={currentSpeaker} />
       </div>
       
       {isLoading && (
-        <div className="py-4">
+        <div className="py-2">
           <LoadingSpinner 
               heading="Deliberating..."
               subheading="The court is processing the information."
+              compact={true}
           />
         </div>
       )}
 
       {!isLoading && apiKeyAvailable && (currentScreen === GameScreen.PLAYER_ACTION || currentScreen === GameScreen.PLAYER_OBJECTION_INPUT) && (
-        <div id="player-actions-area" data-tutorial-target-id="player-actions-area" className="glassmorphic-surface p-2.5 sm:p-3 md:p-4 rounded-xl shadow-lg border border-slate-700/60">
+        <div id="player-actions-area" data-tutorial-target-id="player-actions-area" className="glassmorphic-surface p-2 sm:p-3 md:p-4 rounded-xl shadow-lg border border-slate-700/60">
           <h3 className="text-base sm:text-lg md:text-xl font-semibold text-emerald-400 mb-2 sm:mb-3 text-center">Your Turn!</h3>
           {currentScreen === GameScreen.PLAYER_ACTION && (
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               {PLAYER_TOOLS.map(tool => (
                 <button
                   key={tool.id}
                   data-tool-id={tool.id} 
                   onClick={() => handlePlayerAction(tool.id)}
-                  className="w-full bg-sky-600/50 hover:bg-sky-500/60 backdrop-blur-sm text-white font-semibold py-2.5 sm:py-3 px-3 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-opacity-75 flex items-center justify-center space-x-1.5 sm:space-x-2 text-xs sm:text-sm md:text-base border border-sky-500/70"
+                  className="w-full bg-sky-600/50 hover:bg-sky-500/60 backdrop-blur-sm text-white font-semibold py-2 sm:py-2.5 px-3 rounded-lg shadow-md transition-all duration-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-opacity-75 flex items-center justify-center space-x-1.5 sm:space-x-2 text-xs sm:text-sm md:text-base border border-sky-500/70"
                   title={tool.description}
                   disabled={isLoading}
                 >
-                  <span className="text-lg sm:text-xl">{tool.icon}</span>
+                  <span className="text-base sm:text-lg">{tool.icon}</span>
                   <span>{tool.name}</span>
                 </button>
               ))}

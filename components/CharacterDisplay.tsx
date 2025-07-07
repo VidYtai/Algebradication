@@ -8,7 +8,7 @@ interface CharacterDisplayProps {
 
 const CharacterDisplay: React.FC<CharacterDisplayProps> = ({ role, isSpeaking }) => {
   const getCharacterStyle = () => {
-    let baseStyle = 'p-2 sm:p-3 rounded-xl shadow-lg border transition-all duration-300 ease-in-out glassmorphic-surface';
+    let baseStyle = 'p-1 sm:p-2 rounded-xl shadow-lg border transition-all duration-300 ease-in-out glassmorphic-surface';
     let specificClasses = '';
     let speakingEffect = 'ring-sky-400 ring-offset-slate-900'; // Default speaking ring
 
@@ -68,8 +68,8 @@ const CharacterDisplay: React.FC<CharacterDisplayProps> = ({ role, isSpeaking })
   return (
     <div className={`text-center transform transition-transform duration-300 ${isSpeaking ? 'scale-100' : 'scale-100'}`}> {/* Adjusted scale for speaking off */}
       <div className={getCharacterStyle()}>
-        <span className="text-2xl sm:text-3xl md:text-4xl block mb-1 drop-shadow-sm">{getCharacterEmoji()}</span>
-        <p className="font-semibold text-xs sm:text-sm capitalize truncate">{roleDisplayNameString}</p>
+        <span className="text-lg sm:text-2xl block mb-0 sm:mb-1 drop-shadow-sm">{getCharacterEmoji()}</span>
+        <p className="font-semibold text-[10px] sm:text-xs capitalize truncate">{roleDisplayNameString}</p>
       </div>
        {isSpeaking && <div className={`mt-1.5 h-1 sm:h-1.5 rounded-full animate-pulse w-3/4 mx-auto ${
            role === CharacterRole.JUDGE ? 'bg-violet-400' :
